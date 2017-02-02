@@ -2,6 +2,7 @@
 import commander from 'commander';
 
 import DI from './lib/di';
+import DbAdapter from './lib/db.adapter';
 
 import defaultConfig from './config';
 
@@ -24,8 +25,16 @@ class AirborneCli {
         .action((path, params, options) => (this.handleAction(path, params, options)));
   }
 
-  set({ controllers }) {
+  set({ controllers, database }) {
     this.controllers = controllers;
+    if (database) {
+      this.initDB(database);
+    }
+    return this;
+  }
+
+  initDB(dbConfig) {
+    this.di.set('db', new DbAdapter(dbConfig));
     return this;
   }
 

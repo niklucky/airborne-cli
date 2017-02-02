@@ -1,5 +1,6 @@
 {
   "name": "airborne-cli",
+  "version": "0.0.0-semantically-released",
   "description": "Airborne CLI framework",
   "main": "dist/index.js",
   "scripts": {

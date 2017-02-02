@@ -5,5 +5,5 @@ const controllers = require('./controllers');
 
 const app = new AirborneCli(config);
 app
-  .set({ controllers })
+  .set({ controllers, database: config.db })
   .handle(process.argv);
