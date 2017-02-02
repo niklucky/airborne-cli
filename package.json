@@ -1,11 +1,11 @@
 {
   "name": "airborne-cli",
-  "version": "0.0.0-semantically-released",
+  "version": "0.0.1",
   "description": "Airborne CLI framework",
   "main": "dist/index.js",
   "scripts": {
     "precommit-test": "npm run cover && npm run check-coverage",
-    "precommit": "rimraf dist",
+    "precommit": "npm run build",
     "check-coverage": "nyc check-coverage --statements 60 --branches 60 --functions 30 --lines 60",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "test": "mocha test --recursive --compilers js:babel-register",
@@ -81,6 +81,5 @@
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
-  },
-  "version": "0.0.0-development"
+  }
 }
