@@ -1,5 +1,5 @@
 class TestController {
-  run(params) {
+  start(params) {
     console.log('params', params);
   }
 }
