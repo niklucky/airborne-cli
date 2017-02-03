@@ -45,9 +45,11 @@ class AirborneCli {
   }
 
   dispatch(path, params, options) {
-    const func = this.parsePath(path);
+    const parsed = this.parsePath(path);
     const payload = this.parseParams(params, options.N);
-    func(payload);
+    const ctrl = parsed.controller;
+    const method = parsed.method;
+    ctrl[method](payload);
     return true;
   }
   parseParams(params, isNamed) { // eslint-disable-line
@@ -74,7 +76,10 @@ class AirborneCli {
       const controller = new Controller(this.di);
       const method = (!methodName) ? this.config.defaultMethod : methodName;
       if (controller[method]) {
-        return controller[method];
+        return {
+          controller,
+          method
+        };
       }
       throw new Error('Method is not defined');
     }
