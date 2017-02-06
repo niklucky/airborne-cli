@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import AirborneCLI from '../src/index';
 import DI from '../src/lib/di';
 
-import { config, controllers } from './mocks';
+import { config, controllers, connections } from './mocks';
 
 let app;
 
@@ -46,6 +46,10 @@ describe('Airborne CLI application', () => {
       expect(app).to.have.property('commander');
       expect(app.commander).to.be.an('object');
     });
+    it('connections init', () => {
+      expect(app).to.have.property('connections');
+      expect(app.connections).to.be.an('object');
+    });
   });
   describe('Controllers', () => {
     it('Set controllers', () => {
@@ -53,6 +57,14 @@ describe('Airborne CLI application', () => {
       app.set({ controllers });
       expect(app.controllers).to.be.an('object');
       expect(app.controllers.TestController).to.be.an('function');
+    });
+  });
+  describe('Connections', () => {
+    it('Set connections', () => {
+      expect(app).to.have.property('connections');
+      app.set({ connections });
+      expect(app.connections).to.be.an('object');
+      expect(app.connections.mysql).to.be.an('object');
     });
   });
   describe('handle', () => {

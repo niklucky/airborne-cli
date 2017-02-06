@@ -1,5 +1,6 @@
 class TestController {
   start(params) {
+    this.params = params;
     return params;
   }
 }
@@ -7,6 +8,13 @@ class TestController {
 export const config = {
   version: '0.0.0'
 };
+
 export const controllers = {
   TestController
+};
+
+export const connections = {
+  mysql: {
+    test: true
+  }
 };

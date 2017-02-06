@@ -11,6 +11,7 @@ class AirborneCli {
     }
     this.di = new DI();
     this.controllers = {};
+    this.connections = {};
     this.commander = null;
     this.input = null;
     this.config = Object.assign({}, defaultConfig, config);
@@ -28,9 +29,24 @@ class AirborneCli {
         .action((path, params, options) => (this.handleAction(path, params, options)));
   }
 
-  set({ controllers }) {
+  set({ controllers, connections }) {
+    if (controllers) {
+      this.setControllers(controllers);
+    }
+    if (connections) {
+      this.setConnections(connections);
+    }
+    return this;
+  }
+  setControllers(controllers) {
     this.controllers = controllers;
     return this;
+  }
+  setConnections(connections) {
+    Object.keys(connections).forEach((connectionName) => {
+      this.connections[connectionName] = {};
+    });
+    this.di.set('connections', this.connections);
   }
 
   handle(input) {
